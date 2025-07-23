@@ -1,9 +1,13 @@
 import requests
 import time
 
-
-n = int(input("Please enter desired ammount of loops: "))
 t = float(input("Please enter desired period:  "))
+length = int(
+    input("Please enter desired ammount of time to run this script (in s): "))
+
+n = int(length / t)
+
+print(f"{n} times")
 
 IP = "10.167.111.153"
 USER = "admin"
@@ -15,7 +19,7 @@ for i in range(n):
         "user":   USER,
         "passwd": PASSWD,
         "target": 1,
-        "control": 2  # 2 for power off, 1 for power on
+        "control": 2  # 2 for power alternate
     }, timeout=5)
     r.raise_for_status()
     print(f"[{i}] HTTP {r.status_code} → {r.text.strip()}")
